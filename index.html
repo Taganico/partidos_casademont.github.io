@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B3D91"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>Casademont Zaragoza 2026/27</title>
+<style>
+:root{--navy:#0B3D91;--navy2:#082C69;--line:#D9E2F1;--ink:#14213D;--mut:#5B6B88;--ok:#1B8A4B;--bad:#C0392B}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#F5F8FD;color:var(--ink);padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+header{background:linear-gradient(160deg,var(--navy),var(--navy2));color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px}
+header h1{margin:0;font-size:18px}.sub{font-size:12px;opacity:.85;margin-top:2px}
+.pos{display:flex;gap:8px;margin-top:12px;overflow-x:auto}
+.pos div{flex:1 0 auto;background:rgba(255,255,255,.12);border-radius:10px;padding:6px 10px;font-size:11px;min-width:96px}.pos b{display:block;font-size:16px}
+.bar{position:sticky;top:0;z-index:5;background:#F5F8FD;padding:10px 12px 8px;border-bottom:1px solid var(--line)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg button{border:2px solid var(--line);background:#fff;padding:9px 4px;border-radius:10px;font-size:13px;color:var(--ink);font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.seg button i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.seg button.on{color:#fff;border-color:transparent}
+.seg button[data-v=Todos].on{background:#14213D}.seg button[data-v=ACB].on{background:#0B3D91}.seg button[data-v=LF].on{background:#1C9BD8}.seg button[data-v=EU].on{background:#E08A00}
+.opt{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;color:var(--mut)}.opt input{width:18px;height:18px;accent-color:var(--navy)}
+main{padding:12px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:16px 4px 8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(11,61,145,.05)}
+.card.cACB{border-left:6px solid #0B3D91}.card.cLF{border-left:6px solid #1C9BD8}.card.cEU{border-left:6px solid #E08A00}
+.hero{background:linear-gradient(160deg,var(--navy),#1556C0);color:#fff;border:0}
+.hero .when{font-size:13px;opacity:.9}.hero .vs{font-size:22px;font-weight:700;margin:6px 0 4px}.hero .meta{font-size:13px}
+.cd{display:inline-block;background:#fff;color:var(--navy);font-weight:700;font-size:12px;border-radius:20px;padding:3px 10px;margin-bottom:6px}
+.row1{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.date{font-weight:700;font-size:15px}.time{font-weight:700;color:var(--navy);font-size:15px}.tbc{color:#B7791F;font-size:12px;font-weight:700}
+.vs2{font-size:16px;font-weight:600;margin:6px 0 4px}.vs2 small{font-weight:500;color:var(--mut)}
+.meta2{font-size:12px;color:var(--mut)}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;margin-right:6px;color:#fff}
+.tag.ACB{background:#0B3D91}.tag.LF{background:#1C9BD8}.tag.EU{background:#E08A00}
+.hero .tag.ACB{background:rgba(255,255,255,.25)}
+.ha{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;border:1px solid var(--navy);color:var(--navy)}.ha.L{background:var(--navy);color:#fff}
+.hero .ha{border-color:#fff;color:#fff}.hero .ha.L{background:#fff;color:var(--navy)}
+.res{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.score{font-size:17px;font-weight:800;white-space:nowrap}
+.badge{width:28px;height:28px;border-radius:50%;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.V{background:var(--ok)}.D{background:var(--bad)}.P{background:#8A97B1}
+.form{display:flex;gap:4px}.form .badge{width:22px;height:22px;font-size:11px}
+.rec{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.rec .card{margin:0;text-align:center;padding:10px 6px}.rec b{font-size:18px;display:block}
+.sumg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sumg .card{margin:0;text-align:center}.sumg b{font-size:20px}
+.past{opacity:.8}
+.more{display:block;width:100%;border:1px solid var(--navy);color:var(--navy);background:#fff;border-radius:12px;padding:11px;font-weight:700;font-size:14px}
+.empty{text-align:center;color:var(--mut);padding:30px 10px}
+.foot{font-size:11px;color:var(--mut);text-align:center;margin:18px 8px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}
+nav button{flex:1;border:0;background:none;padding:9px 0 8px;font-size:11px;font-weight:600;color:var(--mut)}
+nav button span{display:block;font-size:20px;line-height:22px}nav button.on{color:var(--navy)}
+</style></head>
+<body>
+<header><h1>Casademont Zaragoza 2026/27</h1><div class="sub" id="upd"></div><div class="pos" id="pos"></div></header>
+<div class="bar"><div class="seg" id="seg"></div>
+<label class="opt" id="homeopt"><input type="checkbox" id="home"> Solo partidos en casa</label></div>
+<main id="main"></main>
+<div class="foot">Horarios sujetos a cambios. Fuentes: ACB, FEB y FIBA.</div>
+<nav id="nav"></nav>
+<script>
+const DATA=[{"d":"2026-09-27","t":"13:00","loc":"La Laguna Tenerife","vis":"Casademont Zaragoza","cond":"Visitante","riv":"La Laguna Tenerife","c":"ACB","j":1,"res":"80-81","bal":"Victoria"},{"d":"2026-10-04","t":"12:15","loc":"Casademont Zaragoza","vis":"Impulso 360 Estepona","cond":"Local","riv":"Impulso 360 Estepona","c":"LF","j":1,"res":"68-41","bal":"Victoria"},{"d":"2026-10-04","t":"17:00","loc":"Casademont Zaragoza","vis":"Valencia Basket","cond":"Local","riv":"Valencia Basket","c":"ACB","j":2,"res":"82-97","bal":"Derrota"},{"d":"2026-10-08","t":"20:00","loc":"Inversus Gernika Bizkaia","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Inversus Gernika Bizkaia","c":"LF","j":2,"res":"72-108","bal":"Victoria"},{"d":"2026-10-10","t":"18:00","loc":"Leyma Coruña","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Leyma Coruña","c":"ACB","j":3,"res":"71-92","bal":"Victoria"},{"d":"2026-10-11","t":null,"loc":"Celta Femxa Zorka","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Celta Femxa Zorka","c":"LF","j":3,"res":"52-83","bal":"Victoria"},{"d":"2026-10-14","t":"19:00","loc":"Casademont Zaragoza","vis":"Basket Landes","cond":"Local","riv":"Basket Landes","c":"EU","j":1,"res":"76-75 (PR)","bal":"Victoria"},{"d":"2026-10-17","t":"18:00","loc":"Casademont Zaragoza","vis":"Durán Maquinaria Ensino","cond":"Local","riv":"Durán Maquinaria Ensino","c":"LF","j":4,"res":"95-64","bal":"Victoria"},{"d":"2026-10-18","t":"12:00","loc":"Casademont Zaragoza","vis":"iLERNA Lleida","cond":"Local","riv":"iLERNA Lleida","c":"ACB","j":4,"res":"109-98","bal":"Victoria"},{"d":"2026-10-21","t":"19:30","loc":"Athinaikos","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Athinaikos","c":"EU","j":2,"res":"78-89","bal":"Victoria"},{"d":"2026-10-25","t":"12:00","loc":"Barça","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Barça","c":"ACB","j":5,"res":"99-81","bal":"Derrota"},{"d":"2026-10-25","t":"12:00","loc":"Meins Avenida","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Meins Avenida","c":"LF","j":5,"res":"71-83","bal":"Victoria"},{"d":"2026-10-29","t":"20:00","loc":"Casademont Zaragoza","vis":"Kibirkstis-MRU","cond":"Local","riv":"Kibirkstis-MRU","c":"EU","j":3,"res":"77-55","bal":"Victoria"},{"d":"2026-10-31","t":"18:00","loc":"Casademont Zaragoza","vis":"FIATC Girona","cond":"Local","riv":"FIATC Girona","c":"ACB","j":6,"res":"107-78","bal":"Victoria"},{"d":"2026-11-01","t":"12:15","loc":"Casademont Zaragoza","vis":"Innova-TSN Leganés","cond":"Local","riv":"Innova-TSN Leganés","c":"LF","j":6,"res":"76-51","bal":"Victoria"},{"d":"2026-11-03","t":"19:30","loc":"Basket Landes","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Basket Landes","c":"EU","j":4,"res":"69-70","bal":"Victoria"},{"d":"2026-11-06","t":null,"loc":"Movistar Estudiantes","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Movistar Estudiantes","c":"LF","j":7,"res":"67-68","bal":"Victoria"},{"d":"2026-11-08","t":"17:00","loc":"Casademont Zaragoza","vis":"Unicaja","cond":"Local","riv":"Unicaja","c":"ACB","j":7,"res":"96-91","bal":"Victoria"},{"d":"2026-11-14","t":"21:00","loc":"Asisa Joventut","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Asisa Joventut","c":"ACB","j":8,"res":"99-94","bal":"Derrota"},{"d":"2026-11-21","t":"21:00","loc":"UCAM Murcia","vis":"Casademont Zaragoza","cond":"Visitante","riv":"UCAM Murcia","c":"ACB","j":9,"res":null,"bal":null},{"d":"2026-11-22","t":"12:00","loc":"Mirai Euskotren","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Mirai Euskotren","c":"LF","j":8,"res":null,"bal":null},{"d":"2026-11-25","t":"20:00","loc":"Casademont Zaragoza","vis":"Athinaikos","cond":"Local","riv":"Athinaikos","c":"EU","j":5,"res":null,"bal":null},{"d":"2026-11-29","t":"12:15","loc":"Casademont Zaragoza","vis":"Hozono Global Jairis","cond":"Local","riv":"Hozono Global Jairis","c":"LF","j":9,"res":null,"bal":null},{"d":"2026-12-02","t":"18:00","loc":"Kibirkstis-MRU","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Kibirkstis-MRU","c":"EU","j":6,"res":null,"bal":null},{"d":"2026-12-05","t":"21:00","loc":"Casademont Zaragoza","vis":"Río Breogán","cond":"Local","riv":"Río Breogán","c":"ACB","j":10,"res":null,"bal":null},{"d":"2026-12-06","t":"12:15","loc":"Casademont Zaragoza","vis":"Spar Girona","cond":"Local","riv":"Spar Girona","c":"LF","j":10,"res":null,"bal":null},{"d":"2026-12-09","t":"20:00","loc":"MoraBanc Andorra","vis":"Casademont Zaragoza","cond":"Visitante","riv":"MoraBanc Andorra","c":"ACB","j":11,"res":null,"bal":null},{"d":"2026-12-09","t":null,"loc":"Azulmarino Mallorca Palma","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Azulmarino Mallorca Palma","c":"LF","j":11,"res":null,"bal":null},{"d":"2026-12-13","t":"12:00","loc":"Surne Bilbao","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Surne Bilbao","c":"ACB","j":12,"res":null,"bal":null},{"d":"2026-12-13","t":"12:30","loc":"Cadí La Seu","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Cadí La Seu","c":"LF","j":12,"res":null,"bal":null},{"d":"2026-12-19","t":"18:00","loc":"Casademont Zaragoza","vis":"Baxi Ferrol","cond":"Local","riv":"Baxi Ferrol","c":"LF","j":13,"res":null,"bal":null},{"d":"2026-12-20","t":"19:00","loc":"Casademont Zaragoza","vis":"Real Madrid","cond":"Local","riv":"Real Madrid","c":"ACB","j":13,"res":null,"bal":null},{"d":"2026-12-22","t":"19:00","loc":"Kutxabank Araski","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Kutxabank Araski","c":"LF","j":14,"res":null,"bal":null},{"d":"2026-12-27","t":"16:30","loc":"Recoletas Salud San Pablo Burgos","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Recoletas Salud San Pablo Burgos","c":"ACB","j":14,"res":null,"bal":null},{"d":"2026-12-29","t":"20:00","loc":"Casademont Zaragoza","vis":"Valencia B.C.","cond":"Local","riv":"Valencia B.C.","c":"LF","j":15,"res":null,"bal":null},{"d":"2027-01-03","t":"17:00","loc":"Innova-TSN Leganés","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Innova-TSN Leganés","c":"LF","j":16,"res":null,"bal":null},{"d":"2027-01-03","t":"18:00","loc":"Casademont Zaragoza","vis":"Kids&Us Manresa","cond":"Local","riv":"Kids&Us Manresa","c":"ACB","j":16,"res":null,"bal":null},{"d":"2027-01-06","t":"19:00","loc":"Casademont Zaragoza","vis":"Kosner Baskonia","cond":"Local","riv":"Kosner Baskonia","c":"ACB","j":15,"res":null,"bal":null},{"d":"2027-01-09","t":"18:00","loc":"Casademont Zaragoza","vis":"Inversus Gernika Bizkaia","cond":"Local","riv":"Inversus Gernika Bizkaia","c":"LF","j":17,"res":null,"bal":null},{"d":"2027-01-10","t":"12:00","loc":"Monbus Obradoiro","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Monbus Obradoiro","c":"ACB","j":17,"res":null,"bal":null},{"d":"2027-01-16","t":"21:00","loc":"Casademont Zaragoza","vis":"La Laguna Tenerife","cond":"Local","riv":"La Laguna Tenerife","c":"ACB","j":18,"res":null,"bal":null},{"d":"2027-01-17","t":"12:15","loc":"Casademont Zaragoza","vis":"Celta Femxa Zorka","cond":"Local","riv":"Celta Femxa Zorka","c":"LF","j":18,"res":null,"bal":null},{"d":"2027-01-24","t":"12:00","loc":"Hozono Global Jairis","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Hozono Global Jairis","c":"LF","j":19,"res":null,"bal":null},{"d":"2027-01-24","t":"12:30","loc":"FIATC Girona","vis":"Casademont Zaragoza","cond":"Visitante","riv":"FIATC Girona","c":"ACB","j":19,"res":null,"bal":null},{"d":"2027-01-30","t":"18:00","loc":"Casademont Zaragoza","vis":"Movistar Estudiantes","cond":"Local","riv":"Movistar Estudiantes","c":"LF","j":20,"res":null,"bal":null},{"d":"2027-01-31","t":"17:00","loc":"Casademont Zaragoza","vis":"Barça","cond":"Local","riv":"Barça","c":"ACB","j":20,"res":null,"bal":null},{"d":"2027-02-05","t":"20:00","loc":"Casademont Zaragoza","vis":"Meins Avenida","cond":"Local","riv":"Meins Avenida","c":"LF","j":21,"res":null,"bal":null},{"d":"2027-02-07","t":"12:30","loc":"Casademont Zaragoza","vis":"Leyma Coruña","cond":"Local","riv":"Leyma Coruña","c":"ACB","j":21,"res":null,"bal":null},{"d":"2027-02-14","t":"12:00","loc":"Valencia Basket","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Valencia Basket","c":"ACB","j":22,"res":null,"bal":null},{"d":"2027-02-21","t":null,"loc":"Baxi Ferrol","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Baxi Ferrol","c":"LF","j":22,"res":null,"bal":null},{"d":"2027-02-28","t":"18:00","loc":"Spar Girona","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Spar Girona","c":"LF","j":23,"res":null,"bal":null},{"d":"2027-03-06","t":"20:00","loc":"Casademont Zaragoza","vis":"Kutxabank Araski","cond":"Local","riv":"Kutxabank Araski","c":"LF","j":24,"res":null,"bal":null},{"d":"2027-03-07","t":"12:30","loc":"Casademont Zaragoza","vis":"MoraBanc Andorra","cond":"Local","riv":"MoraBanc Andorra","c":"ACB","j":23,"res":null,"bal":null},{"d":"2027-03-13","t":"19:00","loc":"Impulso 360 Estepona","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Impulso 360 Estepona","c":"LF","j":25,"res":null,"bal":null},{"d":"2027-03-14","t":"12:30","loc":"Casademont Zaragoza","vis":"Asisa Joventut","cond":"Local","riv":"Asisa Joventut","c":"ACB","j":24,"res":null,"bal":null},{"d":"2027-03-17","t":"20:00","loc":"Casademont Zaragoza","vis":"Azulmarino Mallorca Palma","cond":"Local","riv":"Azulmarino Mallorca Palma","c":"LF","j":26,"res":null,"bal":null},{"d":"2027-03-20","t":"18:30","loc":"Valencia B.C.","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Valencia B.C.","c":"LF","j":27,"res":null,"bal":null},{"d":"2027-03-21","t":"12:00","loc":"iLERNA Lleida","vis":"Casademont Zaragoza","cond":"Visitante","riv":"iLERNA Lleida","c":"ACB","j":25,"res":null,"bal":null},{"d":"2027-03-28","t":"12:00","loc":"Kosner Baskonia","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Kosner Baskonia","c":"ACB","j":26,"res":null,"bal":null},{"d":"2027-04-04","t":"12:30","loc":"Casademont Zaragoza","vis":"UCAM Murcia","cond":"Local","riv":"UCAM Murcia","c":"ACB","j":27,"res":null,"bal":null},{"d":"2027-04-04","t":"18:00","loc":"Casademont Zaragoza","vis":"Cadí La Seu","cond":"Local","riv":"Cadí La Seu","c":"LF","j":28,"res":null,"bal":null},{"d":"2027-04-11","t":"12:00","loc":"Río Breogán","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Río Breogán","c":"ACB","j":28,"res":null,"bal":null},{"d":"2027-04-11","t":"18:00","loc":"Durán Maquinaria Ensino","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Durán Maquinaria Ensino","c":"LF","j":29,"res":null,"bal":null},{"d":"2027-04-17","t":"19:30","loc":"Unicaja","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Unicaja","c":"ACB","j":29,"res":null,"bal":null},{"d":"2027-04-21","t":"20:00","loc":"Casademont Zaragoza","vis":"Mirai Euskotren","cond":"Local","riv":"Mirai Euskotren","c":"LF","j":30,"res":null,"bal":null},{"d":"2027-04-24","t":"18:00","loc":"Casademont Zaragoza","vis":"Surne Bilbao","cond":"Local","riv":"Surne Bilbao","c":"ACB","j":30,"res":null,"bal":null},{"d":"2027-05-01","t":"18:00","loc":"Casademont Zaragoza","vis":"Recoletas Salud San Pablo Burgos","cond":"Local","riv":"Recoletas Salud San Pablo Burgos","c":"ACB","j":31,"res":null,"bal":null},{"d":"2027-05-09","t":"12:00","loc":"Kids&Us Manresa","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Kids&Us Manresa","c":"ACB","j":32,"res":null,"bal":null},{"d":"2027-05-16","t":"12:30","loc":"Real Madrid","vis":"Casademont Zaragoza","cond":"Visitante","riv":"Real Madrid","c":"ACB","j":33,"res":null,"bal":null},{"d":"2027-05-22","t":null,"loc":"Casademont Zaragoza","vis":"Monbus Obradoiro","cond":"Local","riv":"Monbus Obradoiro","c":"ACB","j":34,"res":null,"bal":null}];
+const UPDATED="20/11/2026 08:06";
+const POS=[["Liga ACB","7.º"],["Liga Femenina","1.º"],["EuroLeague W. (Gr. A)","1.º"]];
+const st={tab:"next",c:"Todos",home:false,n:5};
+const CL={ACB:"Liga ACB (masc.)",LF:"Liga Femenina",EU:"EuroLeague Women"};
+const CS={ACB:"Liga ACB",LF:"Liga Femenina",EU:"EuroLeague W."};
+const COL={ACB:"#0B3D91",LF:"#1C9BD8",EU:"#E08A00"};
+function nowMadrid(){const p=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());const g=k=>+p.find(x=>x.type===k).value;return Date.UTC(g("year"),g("month")-1,g("day"),g("hour")%24,g("minute"))}
+const NOW=nowMadrid(),TODAY=Math.floor(NOW/864e5)*864e5;
+const dayMs=m=>{const [y,mo,d]=m.d.split("-").map(Number);return Date.UTC(y,mo-1,d)};
+const start=m=>{let h=0,mi=0;if(m.t){[h,mi]=m.t.split(":").map(Number)}return dayMs(m)+(h*60+mi)*60000};
+const endOf=m=>m.t?start(m)+135*60000:dayMs(m)+864e5;
+DATA.forEach(m=>{m.s=start(m);m.upcoming=!m.res&&endOf(m)>NOW;m.isHome=m.cond==="Local"});
+const fmtDate=(m,l)=>new Date(dayMs(m)).toLocaleDateString("es-ES",{timeZone:"UTC",weekday:l?"long":"short",day:"numeric",month:l?"long":"short"});
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const when=m=>{const d=Math.round((dayMs(m)-TODAY)/864e5);return d<=0?"HOY":d===1?"MAÑANA":"EN "+d+" DÍAS"};
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const filt=m=>st.c==="Todos"||m.c===st.c;
+const oppLine=m=>`<span class="ha ${m.isHome?"L":""}">${m.isHome?"EN CASA":"FUERA"}</span>`;
+const ctag=m=>`<span class="tag ${m.c}">${CL[m.c]}</span>`;
+const tbcNote=m=>m.j===34&&m.c==="ACB"?'<div class="meta2">Fecha pendiente de confirmar por la ACB (21-23/05/2027)</div>':"";
+const heroCard=m=>`<div class="card hero"><span class="cd">${when(m)}</span><div class="when">${cap(fmtDate(m,true))} &middot; ${m.t?m.t+" h":"hora por confirmar"}</div><div class="vs">${m.isHome?"vs":"@"} ${esc(m.riv)}</div><div class="meta">${ctag(m)}${oppLine(m)} &nbsp; Jornada ${m.j}</div></div>`;
+const nextCard=m=>`<div class="card c${m.c}"><div class="row1"><div class="date">${cap(fmtDate(m))}</div><div>${m.t?`<span class="time">${m.t} h</span>`:'<span class="tbc">Hora por confirmar</span>'}</div></div><div class="vs2">${m.isHome?"vs":"@"} ${esc(m.riv)}</div><div class="meta2">${ctag(m)}${oppLine(m)} &nbsp; Jornada ${m.j}</div>${tbcNote(m)}</div>`;
+function resCard(m){
+  const ext=(m.res&&m.res.match(/\(.*\)/))?m.res.match(/\(.*\)/)[0]:"";
+  const [a,b]=(m.res||"").replace(/\s*\(.*\)/,"").split("-");
+  const code=m.bal==="Victoria"?"V":m.bal==="Derrota"?"D":"P";
+  const body=m.res?`<div class="score">${a} - ${b} <small style="font-size:11px;color:var(--mut)">${ext}</small></div>`:`<div class="tbc">Resultado pendiente</div>`;
+  return `<div class="card c${m.c}"><div class="res"><div style="min-width:0"><div class="meta2">${cap(fmtDate(m))} &middot; Jornada ${m.j}</div><div class="vs2">${esc(m.loc)} <small>-</small> ${esc(m.vis)}</div><div class="meta2">${ctag(m)}${oppLine(m)}</div></div><div style="text-align:right"><div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">${body}<div class="badge ${code}">${code==="P"?"?":code}</div></div><div class="meta2">${m.res?"Local - Visitante":""}</div></div></div></div>`;
+}
+const calCard=m=>m.res?resCard(m).replace('class="card ','class="card past '):nextCard(m);
+function viewNext(){
+  const l=DATA.filter(m=>m.upcoming&&filt(m)&&(!st.home||m.isHome)).sort((a,b)=>a.s-b.s);
+  if(!l.length)return '<div class="empty">No hay próximos partidos con este filtro.</div>';
+  const sh=l.slice(0,st.n);
+  let h=`<h2>Próximos ${sh.length} partidos</h2>`+heroCard(sh[0])+sh.slice(1).map(nextCard).join("");
+  if(l.length>st.n)h+=`<button class="more" onclick="st.n+=5;render()">Ver 5 más (${l.length-st.n} restantes)</button>`;
+  const last=["ACB","LF","EU"].filter(e=>st.c==="Todos"||st.c===e).map(e=>DATA.filter(m=>!m.upcoming&&m.res&&m.c===e).sort((a,b)=>b.s-a.s)[0]).filter(Boolean);
+  if(last.length)h+="<h2>Último resultado por competición</h2>"+last.map(resCard).join("");
+  return h;
+}
+function viewRes(){
+  const done=DATA.filter(m=>!m.upcoming&&filt(m)).sort((a,b)=>b.s-a.s),played=done.filter(m=>m.res);
+  const w=played.filter(m=>m.bal==="Victoria").length,d=played.length-w;let h="";
+  if(st.c==="Todos")h+='<div class="rec">'+["ACB","LF","EU"].map(c=>{const pl=DATA.filter(m=>m.res&&m.c===c),v=pl.filter(m=>m.bal==="Victoria").length;return `<div class="card c${c}"><b>${v}-${pl.length-v}</b><div class="meta2">${CS[c]}</div></div>`}).join("")+"</div>";
+  h+=`<div class="sumg"><div class="card"><b>${w}-${d}</b><div class="meta2">Victorias-derrotas</div></div><div class="card"><div class="form" style="justify-content:center">${played.slice(0,5).map(m=>`<div class="badge ${m.bal==="Victoria"?"V":"D"}">${m.bal==="Victoria"?"V":"D"}</div>`).join("")}</div><div class="meta2" style="margin-top:6px">Últimos ${Math.min(5,played.length)}</div></div></div><h2>Resultados anteriores</h2>`;
+  return h+(done.length?done.map(resCard).join(""):'<div class="empty">Todavía no hay resultados.</div>');
+}
+function viewCal(){
+  const l=DATA.filter(m=>filt(m)&&(!st.home||m.isHome)).sort((a,b)=>a.s-b.s);let h="",cur="";
+  l.forEach(m=>{const k=new Date(dayMs(m)).toLocaleDateString("es-ES",{timeZone:"UTC",month:"long",year:"numeric"});if(k!==cur){cur=k;h+=`<h2>${cap(k)}</h2>`}h+=calCard(m)});
+  return h||'<div class="empty">Sin partidos.</div>';
+}
+function render(){
+  document.getElementById("main").innerHTML=st.tab==="next"?viewNext():st.tab==="res"?viewRes():viewCal();
+  document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.c));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.tab));
+  document.getElementById("homeopt").style.display=st.tab==="res"?"none":"flex";
+}
+document.getElementById("upd").textContent="V3 · Datos: "+UPDATED+" · Hoy: "+cap(new Date(TODAY).toLocaleDateString("es-ES",{timeZone:"UTC",weekday:"long",day:"numeric",month:"long"}));
+document.getElementById("pos").innerHTML=POS.map(v=>`<div>${v[0]}<b>${v[1]}</b></div>`).join("");
+document.getElementById("seg").innerHTML=[["Todos","Todos",""],["ACB","Liga ACB (masc.)",COL.ACB],["LF","Liga Femenina",COL.LF],["EU","EuroLeague Women",COL.EU]].map(([v,t,c])=>`<button data-v="${v}">${c?`<i style="background:${c}"></i>`:""}${t}</button>`).join("");
+document.getElementById("nav").innerHTML=[["next","🏀","Próximos"],["res","📊","Resultados"],["cal","📅","Calendario"]].map(([v,i,t])=>`<button data-v="${v}"><span>${i}</span>${t}</button>`).join("");
+document.getElementById("seg").onclick=e=>{const b=e.target.closest("button");if(b){st.c=b.dataset.v;st.n=5;render()}};
+document.getElementById("nav").onclick=e=>{const b=e.target.closest("button");if(b){st.tab=b.dataset.v;st.n=5;render();scrollTo(0,0)}};
+document.getElementById("home").onchange=e=>{st.home=e.target.checked;st.n=5;render()};
+render();
+</script></body></html>
