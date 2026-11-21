@@ -68,37 +68,32 @@ def parse_clas_acb(texto):
     """Extrae la clasificación completa de Liga ACB."""
     equipos = []
     patron = re.compile(
-        r"(\d{1,2})\s+([A-Z]{2,4})\s+(.*?)\s+"
+        r"(\d{1,2})\s+([A-Z]{2,4})\s+"
         r"(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})\s+"
         r"\d{1,3}%\s+(\d{2,4})\s+(\d{2,4})\s+(-?\d+)"
     )
-    for m in patron.finditer(texto):
-        equipos.append({
-            "pos": int(m.group(1)),
-            "equipo": m.group(3).strip(),
-            "pj": int(m.group(4)),
-            "pg": int(m.group(5)),
-            "pp": int(m.group(6)),
-            "pf": int(m.group(7)),
-            "pc": int(m.group(8)),
-            "dif": int(m.group(9))
-        })
-    return equipos
 
-def parse_clas_lf(texto):
-    """Extrae la clasificación completa de Liga Femenina Endesa."""
-    equipos = []
-    patron = re.compile(
-        r"(\d{1,2})\s+"
-        r"([A-ZÁÉÍÓÚÜÑ0-9 .&'()/-]+?)\s+"
-        r"(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})\s+"
-        r"(\d{2,4})\s+(\d{2,4})\s+(-?\d+)\s+"
-        r"\d{1,3}(?:,\d)?%"
-    )
+    nombres = {
+        "RMB": "Real Madrid",
+        "VBC": "Valencia Basket",
+        "LLT": "La Laguna Tenerife",
+        "BAR": "Barça",
+        "BKN": "Kosner Baskonia",
+        "BRE": "Río Breogán",
+        "CAZ": "Casademont Zaragoza",
+        "UNI": "Unicaja",
+        "SBB": "Surne Bilbao",
+        "UCM": "UCAM Murcia",
+        "GIR": "FIATC Girona",
+        "JOV": "Asisa Joventut"
+    }
+
     for m in patron.finditer(texto):
+        codigo = m.group(2)
         equipos.append({
             "pos": int(m.group(1)),
-            "equipo": m.group(2).strip(),
+            "equipo": nombres.get(codigo, codigo),
+            "codigo": codigo,
             "pj": int(m.group(3)),
             "pg": int(m.group(4)),
             "pp": int(m.group(5)),
@@ -106,6 +101,7 @@ def parse_clas_lf(texto):
             "pc": int(m.group(7)),
             "dif": int(m.group(8))
         })
+
     return equipos
 
 
