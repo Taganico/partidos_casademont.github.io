@@ -42,6 +42,15 @@ h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);
 .rec{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.rec .card{margin:0;text-align:center;padding:10px 6px}.rec b{font-size:18px;display:block}
 .sumg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sumg .card{margin:0;text-align:center}.sumg b{font-size:20px}
 .past{opacity:.8}
+.cdown{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 6px rgba(11,61,145,.10);border-top:6px solid #0B3D91}
+.cdown.cLF{border-top-color:#1C9BD8}.cdown.cEU{border-top-color:#E08A00}
+.cdt{font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:var(--mut)}
+.cdm{font-size:17px;font-weight:700;margin:4px 0 2px}.cds{font-size:12px;color:var(--mut)}
+.cdg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.cdg div{background:#F0F5FD;border-radius:12px;text-align:center;padding:10px 2px}
+.cdg b{display:block;font-size:28px;line-height:1.1;color:var(--navy);font-variant-numeric:tabular-nums}
+.cdg span{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+.cdlive{margin-top:12px;text-align:center;font-weight:800;font-size:20px;color:#C0392B}
 .more{display:block;width:100%;border:1px solid var(--navy);color:var(--navy);background:#fff;border-radius:12px;padding:11px;font-weight:700;font-size:14px}
 .empty{text-align:center;color:var(--mut);padding:30px 10px}
 .foot{font-size:11px;color:var(--mut);text-align:center;margin:18px 8px}
@@ -69,7 +78,9 @@ const NOW=nowMadrid(),TODAY=Math.floor(NOW/864e5)*864e5;
 const dayMs=m=>{const [y,mo,d]=m.d.split("-").map(Number);return Date.UTC(y,mo-1,d)};
 const start=m=>{let h=0,mi=0;if(m.t){[h,mi]=m.t.split(":").map(Number)}return dayMs(m)+(h*60+mi)*60000};
 const endOf=m=>m.t?start(m)+135*60000:dayMs(m)+864e5;
-function prep(){DATA.forEach(m=>{m.s=start(m);m.upcoming=!m.res&&endOf(m)>NOW;m.isHome=m.cond==="Local"})}
+function offMadrid(ts){const p=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).formatToParts(new Date(ts));const g=k=>+p.find(x=>x.type===k).value;return Date.UTC(g("year"),g("month")-1,g("day"),g("hour")%24,g("minute"),g("second"))-ts}
+function instante(m){const w=start(m);let t=w-offMadrid(w);t=w-offMadrid(t);return t}
+function prep(){DATA.forEach(m=>{m.inst=instante(m);m.s=start(m);m.upcoming=!m.res&&endOf(m)>NOW;m.isHome=m.cond==="Local"})}
 prep();
 const fmtDate=(m,l)=>new Date(dayMs(m)).toLocaleDateString("es-ES",{timeZone:"UTC",weekday:l?"long":"short",day:"numeric",month:l?"long":"short"});
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
@@ -89,11 +100,36 @@ function resCard(m){
   return `<div class="card c${m.c}"><div class="res"><div style="min-width:0"><div class="meta2">${cap(fmtDate(m))} &middot; Jornada ${m.j}</div><div class="vs2">${esc(m.loc)} <small>-</small> ${esc(m.vis)}</div><div class="meta2">${ctag(m)}${oppLine(m)}</div></div><div style="text-align:right"><div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">${body}<div class="badge ${code}">${code==="P"?"?":code}</div></div><div class="meta2">${m.res?"Local - Visitante":""}</div></div></div></div>`;
 }
 const calCard=m=>m.res?resCard(m).replace('class="card ','class="card past '):nextCard(m);
+function homeNext(){return DATA.filter(m=>m.upcoming&&m.isHome&&filt(m)).sort((a,b)=>a.s-b.s)[0]}
+function cdBlock(){
+  const m=homeNext();
+  if(!m)return `<div class="cdown"><div class="cdt">Próximo partido en casa</div><div class="cdm">No hay más partidos en casa con este filtro</div></div>`;
+  return `<div class="cdown c${m.c}"><div class="cdt">Próximo partido en casa</div>
+  <div class="cdm">vs ${esc(m.riv)}</div>
+  <div class="cds">${cap(fmtDate(m,true))} &middot; ${m.t?m.t+" h":"hora por confirmar"} &middot; ${CL[m.c]} &middot; Jornada ${m.j}</div>
+  <div id="cdgrid" class="cdg"><div><b id="cd-d">-</b><span>días</span></div><div><b id="cd-h">-</b><span>horas</span></div><div><b id="cd-m">-</b><span>min</span></div><div><b id="cd-s">-</b><span>seg</span></div></div>
+  <div id="cdlive" class="cdlive" style="display:none">¡Partido en juego!</div></div>`;
+}
+function tick(){
+  const g=document.getElementById("cd-d");if(!g||st.tab!=="next")return;
+  const m=homeNext();if(!m)return;
+  const set=(i,v)=>{const e=document.getElementById(i);if(e)e.textContent=v};
+  const z=n=>String(n).padStart(2,"0");
+  if(!m.t){ // hora sin confirmar: solo días
+    const d=Math.max(0,Math.round((dayMs(m)-Math.floor(nowMadrid()/864e5)*864e5)/864e5));
+    set("cd-d",d);set("cd-h","--");set("cd-m","--");set("cd-s","--");return;}
+  let ms=m.inst-Date.now();
+  const live=document.getElementById("cdlive"),grid=document.getElementById("cdgrid");
+  if(ms<=0){if(live)live.style.display="block";if(grid)grid.style.display="none";return}
+  if(live)live.style.display="none";if(grid)grid.style.display="grid";
+  const s=Math.floor(ms/1000);
+  set("cd-d",Math.floor(s/86400));set("cd-h",z(Math.floor(s%86400/3600)));set("cd-m",z(Math.floor(s%3600/60)));set("cd-s",z(s%60));
+}
 function viewNext(){
   const l=DATA.filter(m=>m.upcoming&&filt(m)&&(!st.home||m.isHome)).sort((a,b)=>a.s-b.s);
   if(!l.length)return '<div class="empty">No hay próximos partidos con este filtro.</div>';
   const sh=l.slice(0,st.n);
-  let h=`<h2>Próximos ${sh.length} partidos</h2>`+heroCard(sh[0])+sh.slice(1).map(nextCard).join("");
+  let h=cdBlock()+`<h2>Próximos ${sh.length} partidos</h2>`+heroCard(sh[0])+sh.slice(1).map(nextCard).join("");
   if(l.length>st.n)h+=`<button class="more" onclick="st.n+=5;render()">Ver 5 más (${l.length-st.n} restantes)</button>`;
   const last=["ACB","LF","EU"].filter(e=>st.c==="Todos"||st.c===e).map(e=>DATA.filter(m=>!m.upcoming&&m.res&&m.c===e).sort((a,b)=>b.s-a.s)[0]).filter(Boolean);
   if(last.length)h+="<h2>Último resultado por competición</h2>"+last.map(resCard).join("");
@@ -116,8 +152,10 @@ function render(){
   document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.c));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.tab));
   document.getElementById("homeopt").style.display=st.tab==="res"?"none":"flex";
+  tick();
 }
-function hdr(){document.getElementById("upd").textContent="V4 · Datos: "+UPDATED+" ("+FUENTE+") · Hoy: "+cap(new Date(TODAY).toLocaleDateString("es-ES",{timeZone:"UTC",weekday:"long",day:"numeric",month:"long"}));
+setInterval(tick,1000);
+function hdr(){document.getElementById("upd").textContent="V5 · Datos: "+UPDATED+" ("+FUENTE+") · Hoy: "+cap(new Date(TODAY).toLocaleDateString("es-ES",{timeZone:"UTC",weekday:"long",day:"numeric",month:"long"}));
 document.getElementById("pos").innerHTML=POS.map(v=>`<div>${v[0]}<b>${v[1]}</b></div>`).join("")}
 document.getElementById("seg").innerHTML=[["Todos","Todos",""],["ACB","Liga ACB (masc.)",COL.ACB],["LF","Liga Femenina",COL.LF],["EU","EuroLeague Women",COL.EU]].map(([v,t,c])=>`<button data-v="${v}">${c?`<i style="background:${c}"></i>`:""}${t}</button>`).join("");
 document.getElementById("nav").innerHTML=[["next","🏀","Próximos"],["res","📊","Resultados"],["cal","📅","Calendario"]].map(([v,i,t])=>`<button data-v="${v}"><span>${i}</span>${t}</button>`).join("");
