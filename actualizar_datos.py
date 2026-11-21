@@ -17,9 +17,12 @@ from zoneinfo import ZoneInfo
 
 AQUI = Path(__file__).parent
 DATOS = AQUI / "datos.json"
+CLASIFICACION = AQUI / "clasificacion.json"
 MANUAL = AQUI / "manual.json"
 URL_ACB = "https://www.acb.com/es/liga/equipos/casademont-zaragoza-16/partidos"
+URL_CLAS_ACB = "https://www.acb.com/es/liga/clasificacion"
 URL_LF = "https://www.marca.com/baloncesto/liga-femenina/calendario.html"
+URL_CLAS_LF = "https://www.feb.es/lfendesa/clasificacion.aspx"
 EQ = "Casademont Zaragoza"
 
 
@@ -60,6 +63,50 @@ def parse_lf(texto):
         if m:
             out[j] = (int(m.group(1)), int(m.group(2)))
     return out
+
+def parse_clas_acb(texto):
+    """Extrae la clasificación completa de Liga ACB."""
+    equipos = []
+    patron = re.compile(
+        r"(\d{1,2})\s+([A-Z]{2,4})\s+(.*?)\s+"
+        r"(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})\s+"
+        r"\d{1,3}%\s+(\d{2,4})\s+(\d{2,4})\s+(-?\d+)"
+    )
+    for m in patron.finditer(texto):
+        equipos.append({
+            "pos": int(m.group(1)),
+            "equipo": m.group(3).strip(),
+            "pj": int(m.group(4)),
+            "pg": int(m.group(5)),
+            "pp": int(m.group(6)),
+            "pf": int(m.group(7)),
+            "pc": int(m.group(8)),
+            "dif": int(m.group(9))
+        })
+    return equipos
+
+def parse_clas_lf(texto):
+    """Extrae la clasificación completa de Liga Femenina Endesa."""
+    equipos = []
+    patron = re.compile(
+        r"(\d{1,2})\s+"
+        r"([A-ZÁÉÍÓÚÜÑ0-9 .&'()/-]+?)\s+"
+        r"(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})\s+"
+        r"(\d{2,4})\s+(\d{2,4})\s+(-?\d+)\s+"
+        r"\d{1,3}(?:,\d)?%"
+    )
+    for m in patron.finditer(texto):
+        equipos.append({
+            "pos": int(m.group(1)),
+            "equipo": m.group(2).strip(),
+            "pj": int(m.group(3)),
+            "pg": int(m.group(4)),
+            "pp": int(m.group(5)),
+            "pf": int(m.group(6)),
+            "pc": int(m.group(7)),
+            "dif": int(m.group(8))
+        })
+    return equipos
 
 
 def aplicar(partidos, comp, resultados):
@@ -110,7 +157,32 @@ def main():
         except Exception as e:                      # una fuente caida no debe romper el resto
             print(f"{nombre}: no se pudo actualizar ({e})", file=sys.stderr)
     cambios += aplicar_manual(ps)
+    # Actualizar clasificaciones
+    clas = {
+        "actualizado": datetime.now(ZoneInfo("Europe/Madrid")).strftime("%d/%m/%Y %H:%M"),
+        "ACB": [],
+        "LF": [],
+        "EU": []
+    }
 
+    try:
+        clas["ACB"] = parse_clas_acb(a_texto(descargar(URL_CLAS_ACB)))
+        print(f"Clasificación ACB: {len(clas['ACB'])} equipos")
+    except Exception as e:
+        print(f"Clasificación ACB: no se pudo actualizar ({e})", file=sys.stderr)
+
+    try:
+        clas["LF"] = parse_clas_lf(a_texto(descargar(URL_CLAS_LF)))
+        print(f"Clasificación LF: {len(clas['LF'])} equipos")
+    except Exception as e:
+        print(f"Clasificación LF: no se pudo actualizar ({e})", file=sys.stderr)
+
+    CLASIFICACION.write_text(
+        json.dumps(clas, ensure_ascii=False, indent=1),
+        encoding="utf8"
+    )
+
+    
     if args.pos:
         datos["posiciones"] = [["Liga ACB", args.pos[0]], ["Liga Femenina", args.pos[1]],
                                ["EuroLeague W. (Gr. A)", args.pos[2]]]
