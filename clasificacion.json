@@ -1,5 +1,5 @@
 {
- "actualizado": "22/11/2026 10:41",
+ "actualizado": "22/11/2026 13:42",
  "ACB": [
   {
    "pos": 1,
@@ -53,16 +53,6 @@
   },
   {
    "pos": 6,
-   "equipo": "Baskonia",
-   "pj": 8,
-   "pg": 5,
-   "pp": 3,
-   "pf": 749,
-   "pc": 688,
-   "dif": 61
-  },
-  {
-   "pos": 7,
    "equipo": "Unicaja",
    "pj": 9,
    "pg": 5,
@@ -70,6 +60,16 @@
    "pf": 797,
    "pc": 744,
    "dif": 53
+  },
+  {
+   "pos": 7,
+   "equipo": "Baskonia",
+   "pj": 9,
+   "pg": 5,
+   "pp": 4,
+   "pf": 815,
+   "pc": 764,
+   "dif": 51
   },
   {
    "pos": 8,
@@ -84,15 +84,25 @@
   {
    "pos": 9,
    "equipo": "Surne Bilbao",
-   "pj": 8,
-   "pg": 4,
+   "pj": 9,
+   "pg": 5,
    "pp": 4,
-   "pf": 720,
-   "pc": 732,
-   "dif": -12
+   "pf": 796,
+   "pc": 798,
+   "dif": -2
   },
   {
    "pos": 10,
+   "equipo": "FIATC Girona",
+   "pj": 9,
+   "pg": 5,
+   "pp": 4,
+   "pf": 766,
+   "pc": 823,
+   "dif": -57
+  },
+  {
+   "pos": 11,
    "equipo": "UCAM Murcia",
    "pj": 9,
    "pg": 4,
@@ -100,16 +110,6 @@
    "pf": 787,
    "pc": 803,
    "dif": -16
-  },
-  {
-   "pos": 11,
-   "equipo": "FIATC Girona",
-   "pj": 8,
-   "pg": 4,
-   "pp": 4,
-   "pf": 705,
-   "pc": 763,
-   "dif": -58
   },
   {
    "pos": 12,
@@ -123,22 +123,22 @@
   },
   {
    "pos": 13,
-   "equipo": "Monbus Obradoiro",
-   "pj": 8,
+   "equipo": "Leyma Coruña",
+   "pj": 9,
    "pg": 3,
    "pp": 5,
-   "pf": 715,
-   "pc": 784,
-   "dif": -69
+   "pf": 793,
+   "pc": 863,
+   "dif": -70
   },
   {
    "pos": 14,
-   "equipo": "Leyma Coruña",
-   "pj": 8,
+   "equipo": "Monbus Obradoiro",
+   "pj": 9,
    "pg": 3,
-   "pp": 5,
-   "pf": 740,
-   "pc": 810,
+   "pp": 6,
+   "pf": 775,
+   "pc": 845,
    "dif": -70
   },
   {
@@ -174,11 +174,11 @@
   {
    "pos": 18,
    "equipo": "Ilerna Lleida",
-   "pj": 8,
+   "pj": 9,
    "pg": 1,
    "pp": 7,
-   "pf": 742,
-   "pc": 837,
+   "pf": 795,
+   "pc": 890,
    "dif": -95
   }
  ],
