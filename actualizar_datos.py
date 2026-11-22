@@ -113,18 +113,18 @@ def parse_clas_acb(texto):
     """Clasificación completa de Liga ACB."""
     equipos = []
 
-  patron = re.compile(
-    r"(?<!\d)(\d{1,2})\s+"
-    r"([A-Z]{2,4})\s+"
-    r"(?:[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9&.'’()/+-]+\s+)*?"
-    r"(\d{1,2})\s+"
-    r"(\d{1,2})\s+"
-    r"(\d{1,2})\s+"
-    r"\d{1,3}(?:[.,]\d+)?%\s+"
-    r"(\d{2,4})\s+"
-    r"(\d{2,4})\s+"
-    r"([+-]?\d+)"
-)
+    patron = re.compile(
+        r"(?<!\d)(\d{1,2})\s+"
+        r"([A-Z]{2,4})\s+"
+        r"(?:[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9&.'’()/+-]+\s+)*?"
+        r"(\d{1,2})\s+"
+        r"(\d{1,2})\s+"
+        r"(\d{1,2})\s+"
+        r"\d{1,3}(?:[.,]\d+)?%\s+"
+        r"(\d{2,4})\s+"
+        r"(\d{2,4})\s+"
+        r"([+-]?\d+)"
+    )
 
     nombres = {
         "RMB": "Real Madrid",
