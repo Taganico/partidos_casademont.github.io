@@ -261,7 +261,28 @@ def aplicar(partidos, competicion, resultados):
 
                 if rival.lower() not in bloque.lower():
                     continue
+            # ------------------------------------------------
+            # EVITAR CONFUNDIR IDA Y VUELTA CONTRA EL MISMO RIVAL
+            # ------------------------------------------------
+            fecha_feb = dato.get("d")
+            fecha_actual = partido.get("d")
 
+            if fecha_feb and fecha_actual:
+                from datetime import datetime
+
+                try:
+                    f_feb = datetime.strptime(fecha_feb, "%Y-%m-%d")
+                    f_actual = datetime.strptime(fecha_actual, "%Y-%m-%d")
+
+                    diferencia_dias = abs((f_feb - f_actual).days)
+
+                    # Una modificación real de calendario puede mover
+                    # un partido unos días, pero no varios meses.
+                    if diferencia_dias > 30:
+                        continue
+
+                except ValueError:
+                    pass
                 # -----------------------------
                 # ACTUALIZAR FECHA
                 # -----------------------------
