@@ -457,7 +457,9 @@ def main():
         fuentes_resultados = (
         ("ACB", URL_ACB, parse_acb, "ACB"),
         ("LF", URL_LF, parse_lf, "LF")
-    )for nombre, url, parser, competicion in fuentes_resultados:
+    )
+
+    for nombre, url, parser, competicion in fuentes_resultados:
         try:
             texto_web = a_texto(descargar(url))
             resultados = parser(texto_web)
