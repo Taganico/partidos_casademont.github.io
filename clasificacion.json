@@ -1,5 +1,5 @@
 {
- "actualizado": "22/11/2026 14:31",
+ "actualizado": "22/11/2026 15:59",
  "ACB": [
   {
    "pos": 1,
@@ -235,6 +235,16 @@
   },
   {
    "pos": 6,
+   "equipo": "IMPULSO 360 ESTEPONA",
+   "pj": 8,
+   "pg": 5,
+   "pp": 3,
+   "pf": 548,
+   "pc": 524,
+   "dif": 24
+  },
+  {
+   "pos": 7,
    "equipo": "INVERSUS GERNIKA BIZKAIA",
    "pj": 8,
    "pg": 5,
@@ -244,7 +254,7 @@
    "dif": 11
   },
   {
-   "pos": 7,
+   "pos": 8,
    "equipo": "BAXI FERROL",
    "pj": 8,
    "pg": 5,
@@ -252,16 +262,6 @@
    "pf": 568,
    "pc": 613,
    "dif": -45
-  },
-  {
-   "pos": 8,
-   "equipo": "IMPULSO 360 ESTEPONA",
-   "pj": 7,
-   "pg": 4,
-   "pp": 3,
-   "pf": 469,
-   "pc": 450,
-   "dif": 19
   },
   {
    "pos": 9,
@@ -316,12 +316,12 @@
   {
    "pos": 14,
    "equipo": "CELTA FEMXA ZORKA",
-   "pj": 7,
+   "pj": 8,
    "pg": 1,
-   "pp": 6,
-   "pf": 461,
-   "pc": 542,
-   "dif": -81
+   "pp": 7,
+   "pf": 535,
+   "pc": 621,
+   "dif": -86
   },
   {
    "pos": 15,
