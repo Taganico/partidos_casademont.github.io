@@ -1,15 +1,15 @@
 {
- "actualizado": "22/11/2026 17:30",
+ "actualizado": "22/11/2026 19:36",
  "ACB": [
   {
    "pos": 1,
    "equipo": "Real Madrid",
-   "pj": 8,
-   "pg": 8,
+   "pj": 9,
+   "pg": 9,
    "pp": 0,
-   "pf": 842,
-   "pc": 681,
-   "dif": 161
+   "pf": 879,
+   "pc": 707,
+   "dif": 172
   },
   {
    "pos": 2,
@@ -17,29 +17,29 @@
    "pj": 9,
    "pg": 7,
    "pp": 2,
-   "pf": 836,
-   "pc": 742,
-   "dif": 94
+   "pf": 934,
+   "pc": 824,
+   "dif": 110
   },
   {
    "pos": 3,
    "equipo": "La Laguna Tenerife",
-   "pj": 8,
-   "pg": 6,
+   "pj": 9,
+   "pg": 7,
    "pp": 2,
-   "pf": 697,
-   "pc": 637,
-   "dif": 60
+   "pf": 776,
+   "pc": 709,
+   "dif": 67
   },
   {
    "pos": 4,
    "equipo": "Barça",
-   "pj": 8,
+   "pj": 9,
    "pg": 6,
-   "pp": 2,
-   "pf": 789,
-   "pc": 744,
-   "dif": 45
+   "pp": 3,
+   "pf": 861,
+   "pc": 823,
+   "dif": 38
   },
   {
    "pos": 5,
@@ -77,9 +77,9 @@
    "pj": 9,
    "pg": 5,
    "pp": 4,
-   "pf": 867,
-   "pc": 832,
-   "dif": 35
+   "pf": 949,
+   "pc": 930,
+   "dif": 19
   },
   {
    "pos": 9,
@@ -134,12 +134,12 @@
   {
    "pos": 14,
    "equipo": "Joventut Badalona",
-   "pj": 8,
+   "pj": 9,
    "pg": 3,
-   "pp": 5,
-   "pf": 724,
-   "pc": 723,
-   "dif": 1
+   "pp": 6,
+   "pf": 750,
+   "pc": 760,
+   "dif": -10
   },
   {
    "pos": 15,
@@ -216,12 +216,12 @@
   {
    "pos": 4,
    "equipo": "HOZONO GLOBAL JAIRIS",
-   "pj": 7,
-   "pg": 6,
+   "pj": 8,
+   "pg": 7,
    "pp": 1,
-   "pf": 508,
-   "pc": 430,
-   "dif": 78
+   "pf": 592,
+   "pc": 500,
+   "dif": 92
   },
   {
    "pos": 5,
@@ -285,16 +285,6 @@
   },
   {
    "pos": 11,
-   "equipo": "MOVISTAR ESTUDIANTES",
-   "pj": 7,
-   "pg": 2,
-   "pp": 5,
-   "pf": 467,
-   "pc": 526,
-   "dif": -59
-  },
-  {
-   "pos": 12,
    "equipo": "SPAR GIRONA",
    "pj": 8,
    "pg": 2,
@@ -302,6 +292,16 @@
    "pf": 570,
    "pc": 563,
    "dif": 7
+  },
+  {
+   "pos": 12,
+   "equipo": "MOVISTAR ESTUDIANTES",
+   "pj": 8,
+   "pg": 2,
+   "pp": 6,
+   "pf": 537,
+   "pc": 610,
+   "dif": -73
   },
   {
    "pos": 13,
