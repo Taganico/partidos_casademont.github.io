@@ -17,7 +17,7 @@ CLASIFICACION = AQUI / "clasificacion.json"
 MANUAL = AQUI / "manual.json"
 
 URL_ACB = "https://www.acb.com/es/liga/equipos/casademont-zaragoza-16/partidos"
-URL_CLAS_ACB = "https://www.acb.com/es/liga/clasificacion"
+URL_CLAS_ACB = "https://as.com/resultados/baloncesto/acb/2026_2027/clasificacion/"
 URL_LF = "https://www.marca.com/baloncesto/liga-femenina/calendario.html"
 URL_CLAS_LF = "https://www.feb.es/lfendesa/clasificacion.aspx"
 
@@ -110,44 +110,40 @@ def parse_lf(texto):
 
 
 def parse_clas_acb(texto):
-    """Clasificación completa de Liga ACB."""
-    print("DEBUG ACB:", texto[:1500])
-    nombres = {
-        "RMB": "Real Madrid",
-        "VBC": "Valencia Basket",
-        "LLT": "La Laguna Tenerife",
-        "BAR": "Barça",
-        "BKN": "Kosner Baskonia",
-        "BRE": "Río Breogán",
-        "CAZ": "Casademont Zaragoza",
-        "UNI": "Unicaja",
-        "SBB": "Surne Bilbao Basket",
-        "UCM": "UCAM Murcia",
-        "GIR": "FIATC Girona",
-        "JOV": "Asisa Joventut",
-        "AND": "MoraBanc Andorra",
-        "MAN": "Kids&Us Manresa",
-        "COR": "Leyma Coruña",
-        "LLE": "Hiopos Lleida",
-        "BUR": "San Pablo Burgos",
-        "OBR": "Monbus Obradoiro"
-    }
-
+    """Clasificación completa de Liga ACB desde AS."""
     equipos = []
 
-    for codigo, nombre in nombres.items():
+    nombres = [
+        "Real Madrid",
+        "Valencia Basket",
+        "La Laguna Tenerife",
+        "Barça",
+        "Baskonia",
+        "Unicaja",
+        "Río Breogán",
+        "Casademont Zaragoza",
+        "Surne Bilbao",
+        "UCAM Murcia",
+        "FIATC Girona",
+        "Joventut Badalona",
+        "Monbus Obradoiro",
+        "Leyma Coruña",
+        "Baxi Manresa",
+        "Recoletas Salud Burgos",
+        "Morabanc Andorra",
+        "Ilerna Lleida"
+    ]
+
+    for nombre in nombres:
         patron = re.compile(
             r"(?<!\d)(\d{1,2})\s+"
-            + re.escape(codigo) +
-            r"\b.*?"
+            + re.escape(nombre) +
+            r"(?:\s+\d+)?\s+"
             r"(\d{1,2})\s+"
             r"(\d{1,2})\s+"
             r"(\d{1,2})\s+"
-            r"(\d{1,3})%\s+"
             r"(\d{2,4})\s+"
-            r"(\d{2,4})\s+"
-            r"([+-]?\d+)",
-            re.IGNORECASE
+            r"(\d{2,4})"
         )
 
         encontrado = patron.search(texto)
@@ -155,21 +151,23 @@ def parse_clas_acb(texto):
         if not encontrado:
             continue
 
+        pf = int(encontrado.group(5))
+        pc = int(encontrado.group(6))
+
         equipos.append({
             "pos": int(encontrado.group(1)),
             "equipo": nombre,
-            "codigo": codigo,
             "pj": int(encontrado.group(2)),
             "pg": int(encontrado.group(3)),
             "pp": int(encontrado.group(4)),
-            "pf": int(encontrado.group(6)),
-            "pc": int(encontrado.group(7)),
-            "dif": int(encontrado.group(8))
+            "pf": pf,
+            "pc": pc,
+            "dif": pf - pc
         })
 
     equipos.sort(key=lambda equipo: equipo["pos"])
     return equipos
-
+    
 def parse_clas_lf(texto):
     """Clasificación completa de Liga Femenina Endesa."""
     equipos = []
@@ -449,4 +447,3 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
