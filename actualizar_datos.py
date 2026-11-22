@@ -111,7 +111,7 @@ def parse_lf(texto):
 
 def parse_clas_acb(texto):
     """Clasificación completa de Liga ACB."""
-
+    print("DEBUG ACB:", texto[:1500])
     nombres = {
         "RMB": "Real Madrid",
         "VBC": "Valencia Basket",
