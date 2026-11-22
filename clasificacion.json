@@ -1,5 +1,5 @@
 {
- "actualizado": "22/11/2026 01:10",
+ "actualizado": "22/11/2026 01:41",
  "ACB": [],
  "LF": [
   {
@@ -14,47 +14,17 @@
   },
   {
    "pos": 2,
-   "equipo": "4 HOZONO GLOBAL JAIRIS",
+   "equipo": "VALENCIA B.C.",
    "pj": 7,
    "pg": 6,
    "pp": 1,
-   "pf": 508,
-   "pc": 430,
-   "dif": 78
+   "pf": 575,
+   "pc": 454,
+   "dif": 121
   },
   {
    "pos": 3,
-   "equipo": "7 IMPULSO 360 ESTEPONA",
-   "pj": 7,
-   "pg": 4,
-   "pp": 3,
-   "pf": 469,
-   "pc": 450,
-   "dif": 19
-  },
-  {
-   "pos": 4,
-   "equipo": "11 INNOVA-TSN LEGANÉS",
-   "pj": 7,
-   "pg": 2,
-   "pp": 5,
-   "pf": 432,
-   "pc": 486,
-   "dif": -54
-  },
-  {
-   "pos": 5,
-   "equipo": "13 SPAR GIRONA",
-   "pj": 7,
-   "pg": 1,
-   "pp": 6,
-   "pf": 463,
-   "pc": 498,
-   "dif": -35
-  },
-  {
-   "pos": 6,
-   "equipo": "3 AZULMARINO MALLORCA PALMA",
+   "equipo": "AZULMARINO MALLORCA PALMA",
    "pj": 7,
    "pg": 6,
    "pp": 1,
@@ -63,14 +33,134 @@
    "dif": 93
   },
   {
-   "pos": 7,
-   "equipo": "2 VALENCIA B.C.",
+   "pos": 4,
+   "equipo": "HOZONO GLOBAL JAIRIS",
    "pj": 7,
    "pg": 6,
    "pp": 1,
-   "pf": 575,
-   "pc": 454,
-   "dif": 121
+   "pf": 508,
+   "pc": 430,
+   "dif": 78
+  },
+  {
+   "pos": 5,
+   "equipo": "MIRAI EUSKOTREN",
+   "pj": 7,
+   "pg": 5,
+   "pp": 2,
+   "pf": 491,
+   "pc": 452,
+   "dif": 39
+  },
+  {
+   "pos": 6,
+   "equipo": "BAXI FERROL",
+   "pj": 7,
+   "pg": 5,
+   "pp": 2,
+   "pf": 510,
+   "pc": 530,
+   "dif": -20
+  },
+  {
+   "pos": 7,
+   "equipo": "IMPULSO 360 ESTEPONA",
+   "pj": 7,
+   "pg": 4,
+   "pp": 3,
+   "pf": 469,
+   "pc": 450,
+   "dif": 19
+  },
+  {
+   "pos": 8,
+   "equipo": "CADI LA SEU",
+   "pj": 7,
+   "pg": 4,
+   "pp": 3,
+   "pf": 449,
+   "pc": 458,
+   "dif": -9
+  },
+  {
+   "pos": 9,
+   "equipo": "INVERSUS GERNIKA BIZKAIA",
+   "pj": 7,
+   "pg": 4,
+   "pp": 3,
+   "pf": 541,
+   "pc": 562,
+   "dif": -21
+  },
+  {
+   "pos": 10,
+   "equipo": "MEINS AVENIDA",
+   "pj": 7,
+   "pg": 2,
+   "pp": 5,
+   "pf": 500,
+   "pc": 529,
+   "dif": -29
+  },
+  {
+   "pos": 11,
+   "equipo": "INNOVA-TSN LEGANÉS",
+   "pj": 7,
+   "pg": 2,
+   "pp": 5,
+   "pf": 432,
+   "pc": 486,
+   "dif": -54
+  },
+  {
+   "pos": 12,
+   "equipo": "MOVISTAR ESTUDIANTES",
+   "pj": 7,
+   "pg": 2,
+   "pp": 5,
+   "pf": 467,
+   "pc": 526,
+   "dif": -59
+  },
+  {
+   "pos": 13,
+   "equipo": "SPAR GIRONA",
+   "pj": 7,
+   "pg": 1,
+   "pp": 6,
+   "pf": 463,
+   "pc": 498,
+   "dif": -35
+  },
+  {
+   "pos": 14,
+   "equipo": "CELTA FEMXA ZORKA",
+   "pj": 7,
+   "pg": 1,
+   "pp": 6,
+   "pf": 461,
+   "pc": 542,
+   "dif": -81
+  },
+  {
+   "pos": 15,
+   "equipo": "DURÁN MAQUINARIA ENSINO",
+   "pj": 7,
+   "pg": 1,
+   "pp": 6,
+   "pf": 426,
+   "pc": 526,
+   "dif": -100
+  },
+  {
+   "pos": 16,
+   "equipo": "KUTXABANK ARASKI",
+   "pj": 7,
+   "pg": 0,
+   "pp": 7,
+   "pf": 425,
+   "pc": 530,
+   "dif": -105
   }
  ],
  "EU": []
