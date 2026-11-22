@@ -454,7 +454,7 @@ def main():
     partidos = datos["partidos"]
     cambios = 0
 
-        fuentes_resultados = (
+    fuentes_resultados = (
         ("ACB", URL_ACB, parse_acb, "ACB"),
         ("LF", URL_LF, parse_lf, "LF")
     )
