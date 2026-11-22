@@ -439,9 +439,6 @@ def main():
             encoding="utf8"
         )
 
-        print(
-            f"datos.json actualizado ({cambios} cambios)"
-        )
     else:
         print("Sin cambios en resultados")
 
