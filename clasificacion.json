@@ -1,5 +1,5 @@
 {
- "actualizado": "22/11/2026 13:42",
+ "actualizado": "22/11/2026 14:31",
  "ACB": [
   {
    "pos": 1,
@@ -53,6 +53,16 @@
   },
   {
    "pos": 6,
+   "equipo": "Baskonia",
+   "pj": 9,
+   "pg": 5,
+   "pp": 4,
+   "pf": 829,
+   "pc": 772,
+   "dif": 57
+  },
+  {
+   "pos": 7,
    "equipo": "Unicaja",
    "pj": 9,
    "pg": 5,
@@ -60,16 +70,6 @@
    "pf": 797,
    "pc": 744,
    "dif": 53
-  },
-  {
-   "pos": 7,
-   "equipo": "Baskonia",
-   "pj": 9,
-   "pg": 5,
-   "pp": 4,
-   "pf": 815,
-   "pc": 764,
-   "dif": 51
   },
   {
    "pos": 8,
@@ -87,22 +87,12 @@
    "pj": 9,
    "pg": 5,
    "pp": 4,
-   "pf": 796,
-   "pc": 798,
-   "dif": -2
+   "pf": 804,
+   "pc": 812,
+   "dif": -8
   },
   {
    "pos": 10,
-   "equipo": "FIATC Girona",
-   "pj": 9,
-   "pg": 5,
-   "pp": 4,
-   "pf": 766,
-   "pc": 823,
-   "dif": -57
-  },
-  {
-   "pos": 11,
    "equipo": "UCAM Murcia",
    "pj": 9,
    "pg": 4,
@@ -112,7 +102,37 @@
    "dif": -16
   },
   {
+   "pos": 11,
+   "equipo": "Leyma Coruña",
+   "pj": 9,
+   "pg": 4,
+   "pp": 5,
+   "pf": 853,
+   "pc": 910,
+   "dif": -57
+  },
+  {
    "pos": 12,
+   "equipo": "Monbus Obradoiro",
+   "pj": 9,
+   "pg": 4,
+   "pp": 5,
+   "pf": 806,
+   "pc": 865,
+   "dif": -59
+  },
+  {
+   "pos": 13,
+   "equipo": "FIATC Girona",
+   "pj": 9,
+   "pg": 4,
+   "pp": 5,
+   "pf": 786,
+   "pc": 854,
+   "dif": -68
+  },
+  {
+   "pos": 14,
    "equipo": "Joventut Badalona",
    "pj": 8,
    "pg": 3,
@@ -120,26 +140,6 @@
    "pf": 724,
    "pc": 723,
    "dif": 1
-  },
-  {
-   "pos": 13,
-   "equipo": "Leyma Coruña",
-   "pj": 9,
-   "pg": 3,
-   "pp": 5,
-   "pf": 793,
-   "pc": 863,
-   "dif": -70
-  },
-  {
-   "pos": 14,
-   "equipo": "Monbus Obradoiro",
-   "pj": 9,
-   "pg": 3,
-   "pp": 6,
-   "pf": 775,
-   "pc": 845,
-   "dif": -70
   },
   {
    "pos": 15,
@@ -176,10 +176,10 @@
    "equipo": "Ilerna Lleida",
    "pj": 9,
    "pg": 1,
-   "pp": 7,
-   "pf": 795,
-   "pc": 890,
-   "dif": -95
+   "pp": 8,
+   "pf": 842,
+   "pc": 950,
+   "dif": -108
   }
  ],
  "LF": [
@@ -196,22 +196,22 @@
   {
    "pos": 2,
    "equipo": "VALENCIA B.C.",
-   "pj": 7,
-   "pg": 6,
+   "pj": 8,
+   "pg": 7,
    "pp": 1,
-   "pf": 575,
-   "pc": 454,
-   "dif": 121
+   "pf": 666,
+   "pc": 513,
+   "dif": 153
   },
   {
    "pos": 3,
    "equipo": "AZULMARINO MALLORCA PALMA",
-   "pj": 7,
-   "pg": 6,
+   "pj": 8,
+   "pg": 7,
    "pp": 1,
-   "pf": 547,
-   "pc": 454,
-   "dif": 93
+   "pf": 630,
+   "pc": 512,
+   "dif": 118
   },
   {
    "pos": 4,
@@ -235,16 +235,26 @@
   },
   {
    "pos": 6,
-   "equipo": "BAXI FERROL",
-   "pj": 7,
+   "equipo": "INVERSUS GERNIKA BIZKAIA",
+   "pj": 8,
    "pg": 5,
-   "pp": 2,
-   "pf": 510,
-   "pc": 530,
-   "dif": -20
+   "pp": 3,
+   "pf": 622,
+   "pc": 611,
+   "dif": 11
   },
   {
    "pos": 7,
+   "equipo": "BAXI FERROL",
+   "pj": 8,
+   "pg": 5,
+   "pp": 3,
+   "pf": 568,
+   "pc": 613,
+   "dif": -45
+  },
+  {
+   "pos": 8,
    "equipo": "IMPULSO 360 ESTEPONA",
    "pj": 7,
    "pg": 4,
@@ -254,24 +264,14 @@
    "dif": 19
   },
   {
-   "pos": 8,
-   "equipo": "CADI LA SEU",
-   "pj": 7,
-   "pg": 4,
-   "pp": 3,
-   "pf": 449,
-   "pc": 458,
-   "dif": -9
-  },
-  {
    "pos": 9,
-   "equipo": "INVERSUS GERNIKA BIZKAIA",
-   "pj": 7,
+   "equipo": "CADI LA SEU",
+   "pj": 8,
    "pg": 4,
-   "pp": 3,
-   "pf": 541,
-   "pc": 562,
-   "dif": -21
+   "pp": 4,
+   "pf": 498,
+   "pc": 539,
+   "dif": -41
   },
   {
    "pos": 10,
@@ -285,16 +285,6 @@
   },
   {
    "pos": 11,
-   "equipo": "INNOVA-TSN LEGANÉS",
-   "pj": 7,
-   "pg": 2,
-   "pp": 5,
-   "pf": 432,
-   "pc": 486,
-   "dif": -54
-  },
-  {
-   "pos": 12,
    "equipo": "MOVISTAR ESTUDIANTES",
    "pj": 7,
    "pg": 2,
@@ -304,14 +294,24 @@
    "dif": -59
   },
   {
-   "pos": 13,
+   "pos": 12,
    "equipo": "SPAR GIRONA",
-   "pj": 7,
-   "pg": 1,
+   "pj": 8,
+   "pg": 2,
    "pp": 6,
-   "pf": 463,
-   "pc": 498,
-   "dif": -35
+   "pf": 570,
+   "pc": 563,
+   "dif": 7
+  },
+  {
+   "pos": 13,
+   "equipo": "INNOVA-TSN LEGANÉS",
+   "pj": 8,
+   "pg": 2,
+   "pp": 6,
+   "pf": 491,
+   "pc": 577,
+   "dif": -86
   },
   {
    "pos": 14,
@@ -326,12 +326,12 @@
   {
    "pos": 15,
    "equipo": "DURÁN MAQUINARIA ENSINO",
-   "pj": 7,
+   "pj": 8,
    "pg": 1,
-   "pp": 6,
-   "pf": 426,
-   "pc": 526,
-   "dif": -100
+   "pp": 7,
+   "pf": 491,
+   "pc": 633,
+   "dif": -142
   },
   {
    "pos": 16,
