@@ -459,20 +459,17 @@ def main():
         ("LF", URL_LF, parse_lf, "LF")
     )
 
-    for nombre, url, parser, competicion in fuentes_resultados:
+  for nombre, url, parser, competicion in fuentes_resultados:
         try:
             texto_web = a_texto(descargar(url))
 
-            if nombre == "LF":
-                print("===== INICIO DIAGNOSTICO LF =====")
-                print(texto_web)
-                print("===== FIN DIAGNOSTICO LF =====")
-
             resultados = parser(texto_web)
+
             print(
                 f"{nombre}: {len(resultados)} "
                 "resultados leídos"
             )
+
             cambios += aplicar(
                 partidos,
                 competicion,
