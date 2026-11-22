@@ -461,9 +461,14 @@ def main():
 
     for nombre, url, parser, competicion in fuentes_resultados:
         try:
-            resultados = parser(
-                a_texto(descargar(url))
-            )
+            texto_web = a_texto(descargar(url))
+
+            if nombre == "LF":
+                print("===== INICIO DIAGNOSTICO LF =====")
+                print(texto_web)
+                print("===== FIN DIAGNOSTICO LF =====")
+
+            resultados = parser(texto_web)
             print(
                 f"{nombre}: {len(resultados)} "
                 "resultados leídos"
