@@ -113,17 +113,18 @@ def parse_clas_acb(texto):
     """Clasificación completa de Liga ACB."""
     equipos = []
 
-    patron = re.compile(
-        r"(?<!\d)(\d{1,2})\s+"
-        r"([A-Z]{2,4})\s+"
-        r"(\d{1,2})\s+"
-        r"(\d{1,2})\s+"
-        r"(\d{1,2})\s+"
-        r"\d{1,3}(?:[.,]\d+)?%\s+"
-        r"(\d{2,4})\s+"
-        r"(\d{2,4})\s+"
-        r"([+-]?\d+)"
-    )
+  patron = re.compile(
+    r"(?<!\d)(\d{1,2})\s+"
+    r"([A-Z]{2,4})\s+"
+    r"(?:[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9&.'’()/+-]+\s+)*?"
+    r"(\d{1,2})\s+"
+    r"(\d{1,2})\s+"
+    r"(\d{1,2})\s+"
+    r"\d{1,3}(?:[.,]\d+)?%\s+"
+    r"(\d{2,4})\s+"
+    r"(\d{2,4})\s+"
+    r"([+-]?\d+)"
+)
 
     nombres = {
         "RMB": "Real Madrid",
@@ -177,37 +178,52 @@ def parse_clas_lf(texto):
     """Clasificación completa de Liga Femenina Endesa."""
     equipos = []
 
-    patron = re.compile(
-        r"(?<!\d)(\d{1,2})\s+"
-        r"([A-ZÁÉÍÓÚÜÑ0-9 .&'()/-]+?)\s+"
-        r"(\d{1,2})\s+"
-        r"(\d{1,2})\s+"
-        r"(\d{1,2})\s+"
-        r"(\d{2,4})\s+"
-        r"(\d{2,4})\s+"
-        r"([+-]?\d+)\s+"
-        r"\d{1,3}(?:[.,]\d+)?%"
-    )
+    nombres = [
+        "CASADEMONT ZARAGOZA",
+        "VALENCIA B.C.",
+        "AZULMARINO MALLORCA PALMA",
+        "HOZONO GLOBAL JAIRIS",
+        "MIRAI EUSKOTREN",
+        "BAXI FERROL",
+        "IMPULSO 360 ESTEPONA",
+        "CADI LA SEU",
+        "INVERSUS GERNIKA BIZKAIA",
+        "MEINS AVENIDA",
+        "INNOVA-TSN LEGANÉS",
+        "MOVISTAR ESTUDIANTES",
+        "SPAR GIRONA",
+        "CELTA FEMXA ZORKA",
+        "DURÁN MAQUINARIA ENSINO",
+        "KUTXABANK ARASKI"
+    ]
 
-    posiciones_vistas = set()
+    for nombre in nombres:
+        patron = re.compile(
+            r"(?<!\d)(\d{1,2})\s+"
+            + re.escape(nombre) +
+            r"\s+(\d{1,2})\s+"
+            r"(\d{1,2})\s+"
+            r"(\d{1,2})\s+"
+            r"(\d{2,4})\s+"
+            r"(\d{2,4})\s+"
+            r"([+-]?\d+)\s+"
+            r"\d{1,3}(?:[.,]\d+)?%"
+        )
 
-    for encontrado in patron.finditer(texto):
-        posicion = int(encontrado.group(1))
+        encontrado = patron.search(texto)
 
-        if posicion in posiciones_vistas:
+        if not encontrado:
             continue
 
-        posiciones_vistas.add(posicion)
-
         equipos.append({
-            "pos": posicion,
-            "equipo": encontrado.group(2).strip(),
-            "pj": int(encontrado.group(3)),
-            "pg": int(encontrado.group(4)),
-            "pp": int(encontrado.group(5)),
-            "pf": int(encontrado.group(6)),
-            "pc": int(encontrado.group(7)),
-            "dif": int(encontrado.group(8))
+            "pos": int(encontrado.group(1)),
+            "equipo": nombre,
+            "pj": int(encontrado.group(2)),
+            "pg": int(encontrado.group(3)),
+            "pp": int(encontrado.group(4)),
+            "pf": int(encontrado.group(5)),
+            "pc": int(encontrado.group(6)),
+            "dif": int(encontrado.group(7))
         })
 
     equipos.sort(key=lambda equipo: equipo["pos"])
