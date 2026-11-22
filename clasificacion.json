@@ -1,6 +1,187 @@
 {
- "actualizado": "22/11/2026 02:20",
- "ACB": [],
+ "actualizado": "22/11/2026 02:46",
+ "ACB": [
+  {
+   "pos": 1,
+   "equipo": "Real Madrid",
+   "pj": 8,
+   "pg": 8,
+   "pp": 0,
+   "pf": 842,
+   "pc": 681,
+   "dif": 161
+  },
+  {
+   "pos": 2,
+   "equipo": "Valencia Basket",
+   "pj": 8,
+   "pg": 6,
+   "pp": 2,
+   "pf": 805,
+   "pc": 713,
+   "dif": 92
+  },
+  {
+   "pos": 3,
+   "equipo": "La Laguna Tenerife",
+   "pj": 8,
+   "pg": 6,
+   "pp": 2,
+   "pf": 697,
+   "pc": 637,
+   "dif": 60
+  },
+  {
+   "pos": 4,
+   "equipo": "Barça",
+   "pj": 8,
+   "pg": 6,
+   "pp": 2,
+   "pf": 789,
+   "pc": 744,
+   "dif": 45
+  },
+  {
+   "pos": 5,
+   "equipo": "Casademont Zaragoza",
+   "pj": 9,
+   "pg": 6,
+   "pp": 3,
+   "pf": 816,
+   "pc": 785,
+   "dif": 31
+  },
+  {
+   "pos": 6,
+   "equipo": "Baskonia",
+   "pj": 8,
+   "pg": 5,
+   "pp": 3,
+   "pf": 749,
+   "pc": 688,
+   "dif": 61
+  },
+  {
+   "pos": 7,
+   "equipo": "Unicaja",
+   "pj": 9,
+   "pg": 5,
+   "pp": 4,
+   "pf": 797,
+   "pc": 744,
+   "dif": 53
+  },
+  {
+   "pos": 8,
+   "equipo": "Río Breogán",
+   "pj": 8,
+   "pg": 5,
+   "pp": 3,
+   "pf": 838,
+   "pc": 801,
+   "dif": 37
+  },
+  {
+   "pos": 9,
+   "equipo": "Surne Bilbao",
+   "pj": 8,
+   "pg": 4,
+   "pp": 4,
+   "pf": 720,
+   "pc": 732,
+   "dif": -12
+  },
+  {
+   "pos": 10,
+   "equipo": "UCAM Murcia",
+   "pj": 9,
+   "pg": 4,
+   "pp": 5,
+   "pf": 787,
+   "pc": 803,
+   "dif": -16
+  },
+  {
+   "pos": 11,
+   "equipo": "FIATC Girona",
+   "pj": 8,
+   "pg": 4,
+   "pp": 4,
+   "pf": 705,
+   "pc": 763,
+   "dif": -58
+  },
+  {
+   "pos": 12,
+   "equipo": "Joventut Badalona",
+   "pj": 8,
+   "pg": 3,
+   "pp": 5,
+   "pf": 724,
+   "pc": 723,
+   "dif": 1
+  },
+  {
+   "pos": 13,
+   "equipo": "Monbus Obradoiro",
+   "pj": 8,
+   "pg": 3,
+   "pp": 5,
+   "pf": 715,
+   "pc": 784,
+   "dif": -69
+  },
+  {
+   "pos": 14,
+   "equipo": "Leyma Coruña",
+   "pj": 8,
+   "pg": 3,
+   "pp": 5,
+   "pf": 740,
+   "pc": 810,
+   "dif": -70
+  },
+  {
+   "pos": 15,
+   "equipo": "Baxi Manresa",
+   "pj": 9,
+   "pg": 3,
+   "pp": 6,
+   "pf": 794,
+   "pc": 894,
+   "dif": -100
+  },
+  {
+   "pos": 16,
+   "equipo": "Recoletas Salud Burgos",
+   "pj": 9,
+   "pg": 2,
+   "pp": 7,
+   "pf": 802,
+   "pc": 838,
+   "dif": -36
+  },
+  {
+   "pos": 17,
+   "equipo": "Morabanc Andorra",
+   "pj": 9,
+   "pg": 1,
+   "pp": 8,
+   "pf": 777,
+   "pc": 862,
+   "dif": -85
+  },
+  {
+   "pos": 18,
+   "equipo": "Ilerna Lleida",
+   "pj": 8,
+   "pg": 1,
+   "pp": 7,
+   "pf": 742,
+   "pc": 837,
+   "dif": -95
+  }
+ ],
  "LF": [
   {
    "pos": 1,
