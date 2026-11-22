@@ -253,14 +253,17 @@ def aplicar(partidos, competicion, resultados):
             for dato in resultados:
 
                 bloque = dato.get("bloque", "")
-
-                # El partido de FEB debe contener
-                # Casademont Zaragoza y el rival
-                if EQ.lower() not in bloque.lower():
+                local_esperado = partido.get("loc", "")
+                visitante_esperado = partido.get("vis", "")
+                if local_esperado.lower() not in bloque.lower():
+                    continue
+                if visitante_esperado.lower() not in bloque.lower():
                     continue
 
-                if rival.lower() not in bloque.lower():
+                if bloque.lower().find(local_esperado.lower()) > 
+                    bloque.lower().find(visitante_esperado.lower()):
                     continue
+                    
             # ------------------------------------------------
             # EVITAR CONFUNDIR IDA Y VUELTA CONTRA EL MISMO RIVAL
             # ------------------------------------------------
