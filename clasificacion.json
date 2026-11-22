@@ -1,6 +1,77 @@
 {
-  "actualizado": "",
-  "ACB": [],
-  "LF": [],
-  "EU": []
+ "actualizado": "22/11/2026 01:10",
+ "ACB": [],
+ "LF": [
+  {
+   "pos": 1,
+   "equipo": "CASADEMONT ZARAGOZA",
+   "pj": 7,
+   "pg": 7,
+   "pp": 0,
+   "pf": 581,
+   "pc": 418,
+   "dif": 163
+  },
+  {
+   "pos": 2,
+   "equipo": "4 HOZONO GLOBAL JAIRIS",
+   "pj": 7,
+   "pg": 6,
+   "pp": 1,
+   "pf": 508,
+   "pc": 430,
+   "dif": 78
+  },
+  {
+   "pos": 3,
+   "equipo": "7 IMPULSO 360 ESTEPONA",
+   "pj": 7,
+   "pg": 4,
+   "pp": 3,
+   "pf": 469,
+   "pc": 450,
+   "dif": 19
+  },
+  {
+   "pos": 4,
+   "equipo": "11 INNOVA-TSN LEGANÉS",
+   "pj": 7,
+   "pg": 2,
+   "pp": 5,
+   "pf": 432,
+   "pc": 486,
+   "dif": -54
+  },
+  {
+   "pos": 5,
+   "equipo": "13 SPAR GIRONA",
+   "pj": 7,
+   "pg": 1,
+   "pp": 6,
+   "pf": 463,
+   "pc": 498,
+   "dif": -35
+  },
+  {
+   "pos": 6,
+   "equipo": "3 AZULMARINO MALLORCA PALMA",
+   "pj": 7,
+   "pg": 6,
+   "pp": 1,
+   "pf": 547,
+   "pc": 454,
+   "dif": 93
+  },
+  {
+   "pos": 7,
+   "equipo": "2 VALENCIA B.C.",
+   "pj": 7,
+   "pg": 6,
+   "pp": 1,
+   "pf": 575,
+   "pc": 454,
+   "dif": 121
+  }
+ ],
+ "EU": []
 }
