@@ -111,20 +111,6 @@ def parse_lf(texto):
 
 def parse_clas_acb(texto):
     """Clasificación completa de Liga ACB."""
-    equipos = []
-
-    patron = re.compile(
-        r"(?<!\d)(\d{1,2})\s+"
-        r"([A-Z]{2,4})\s+"
-        r"(?:[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9&.'’()/+-]+\s+)*?"
-        r"(\d{1,2})\s+"
-        r"(\d{1,2})\s+"
-        r"(\d{1,2})\s+"
-        r"\d{1,3}(?:[.,]\d+)?%\s+"
-        r"(\d{2,4})\s+"
-        r"(\d{2,4})\s+"
-        r"([+-]?\d+)"
-    )
 
     nombres = {
         "RMB": "Real Madrid",
@@ -147,24 +133,35 @@ def parse_clas_acb(texto):
         "OBR": "Monbus Obradoiro"
     }
 
-    posiciones_vistas = set()
+    equipos = []
 
-    for encontrado in patron.finditer(texto):
-        posicion = int(encontrado.group(1))
+    for codigo, nombre in nombres.items():
+        patron = re.compile(
+            r"(?<!\d)(\d{1,2})\s+"
+            + re.escape(codigo) +
+            r"\b.*?"
+            r"(\d{1,2})\s+"
+            r"(\d{1,2})\s+"
+            r"(\d{1,2})\s+"
+            r"(\d{1,3})%\s+"
+            r"(\d{2,4})\s+"
+            r"(\d{2,4})\s+"
+            r"([+-]?\d+)",
+            re.IGNORECASE
+        )
 
-        if posicion in posiciones_vistas:
+        encontrado = patron.search(texto)
+
+        if not encontrado:
             continue
 
-        posiciones_vistas.add(posicion)
-        codigo = encontrado.group(2)
-
         equipos.append({
-            "pos": posicion,
-            "equipo": nombres.get(codigo, codigo),
+            "pos": int(encontrado.group(1)),
+            "equipo": nombre,
             "codigo": codigo,
-            "pj": int(encontrado.group(3)),
-            "pg": int(encontrado.group(4)),
-            "pp": int(encontrado.group(5)),
+            "pj": int(encontrado.group(2)),
+            "pg": int(encontrado.group(3)),
+            "pp": int(encontrado.group(4)),
             "pf": int(encontrado.group(6)),
             "pc": int(encontrado.group(7)),
             "dif": int(encontrado.group(8))
@@ -172,7 +169,6 @@ def parse_clas_acb(texto):
 
     equipos.sort(key=lambda equipo: equipo["pos"])
     return equipos
-
 
 def parse_clas_lf(texto):
     """Clasificación completa de Liga Femenina Endesa."""
