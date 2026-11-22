@@ -278,7 +278,7 @@ def aplicar(partidos, competicion, resultados):
 
                     # Una modificación real de calendario puede mover
                     # un partido unos días, pero no varios meses.
-                    if diferencia_dias > 30:
+                    if diferencia_dias > 14:
                         continue
 
                 except ValueError:
