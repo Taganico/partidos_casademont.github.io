@@ -18,7 +18,7 @@ MANUAL = AQUI / "manual.json"
 
 URL_ACB = "https://www.acb.com/es/liga/equipos/casademont-zaragoza-16/partidos"
 URL_CLAS_ACB = "https://as.com/resultados/baloncesto/acb/2026_2027/clasificacion/"
-URL_LF = "https://www.marca.com/baloncesto/liga-femenina/calendario.html"
+URL_LF = "https://www.feb.es/lfendesa/resultados.aspx"
 URL_CLAS_LF = "https://www.feb.es/lfendesa/clasificacion.aspx"
 
 EQ = "Casademont Zaragoza"
@@ -69,45 +69,52 @@ def parse_acb(texto):
 
 
 def parse_lf(texto):
-    """Resultados Liga Femenina: {jornada: (local, visitante)}."""
-    resultados = {}
+    """Lee fecha, hora y marcador desde la web oficial de la FEB."""
+    partidos_feb = []
 
-    for seccion in re.split(r"(?=Jornada \d+ - )", texto):
-        jornada_encontrada = re.match(
-            r"Jornada (\d+) - ",
-            seccion
-        )
+    patron = re.compile(
+        r"Día:\s*(\d{2}/\d{2}/\d{4})\s*/\s*"
+        r"Hora:\s*(\d{1,2}:\d{2})\s+"
+        r"(.*?)(?=Día:\s*\d{2}/\d{2}/\d{4}|$)",
+        re.IGNORECASE
+    )
 
-        if not jornada_encontrada:
+    for coincidencia in patron.finditer(texto):
+        fecha_feb = coincidencia.group(1)
+        hora_feb = coincidencia.group(2)
+        bloque = coincidencia.group(3)
+
+        if EQ.lower() not in bloque.lower():
             continue
 
-        jornada = int(jornada_encontrada.group(1))
-
-        partido = re.search(
-            rf"{re.escape(EQ)} (\d{{2,3}})-(\d{{2,3}}) ",
-            seccion
+        marcador = re.search(
+            r"(\d{1,3})\s*-\s*(\d{1,3})",
+            bloque
         )
 
-        if partido:
-            resultados[jornada] = (
-                int(partido.group(1)),
-                int(partido.group(2))
-            )
-            continue
+        dia, mes, ano = fecha_feb.split("/")
 
-        partido = re.search(
-            rf" (\d{{2,3}})-(\d{{2,3}}) {re.escape(EQ)}",
-            seccion
-        )
+        partido = {
+            "d": f"{ano}-{mes}-{dia}",
+            "t": hora_feb,
+            "res": None,
+            "bloque": bloque
+        }
 
-        if partido:
-            resultados[jornada] = (
-                int(partido.group(1)),
-                int(partido.group(2))
-            )
+        if marcador:
+            puntos_local = int(marcador.group(1))
+            puntos_visitante = int(marcador.group(2))
 
-    return resultados
+            # En FEB, 00-00 significa que el partido aún no se ha jugado.
+            if puntos_local != 0 or puntos_visitante != 0:
+                partido["res"] = (
+                    puntos_local,
+                    puntos_visitante
+                )
 
+        partidos_feb.append(partido)
+
+    return partidos_feb
 
 def parse_clas_acb(texto):
     """Clasificación completa de Liga ACB desde AS."""
@@ -227,7 +234,100 @@ def parse_clas_lf(texto):
 def aplicar(partidos, competicion, resultados):
     cambios = 0
 
+    # -----------------------------------------
+    # LIGA FEMENINA - Fuente oficial FEB
+    # Actualiza fecha, hora y resultado
+    # -----------------------------------------
+    if competicion == "LF":
+
+        for partido in partidos:
+
+            if partido["c"] != "LF":
+                continue
+
+            rival = partido.get("riv", "")
+
+            if not rival:
+                continue
+
+            for dato in resultados:
+
+                bloque = dato.get("bloque", "")
+
+                # El partido de FEB debe contener
+                # Casademont Zaragoza y el rival
+                if EQ.lower() not in bloque.lower():
+                    continue
+
+                if rival.lower() not in bloque.lower():
+                    continue
+
+                # -----------------------------
+                # ACTUALIZAR FECHA
+                # -----------------------------
+                nueva_fecha = dato.get("d")
+
+                if nueva_fecha and partido.get("d") != nueva_fecha:
+                    print(
+                        f"LF J{partido['j']}: "
+                        f"fecha {partido.get('d')} -> {nueva_fecha}"
+                    )
+
+                    partido["d"] = nueva_fecha
+                    cambios += 1
+
+                # -----------------------------
+                # ACTUALIZAR HORA
+                # -----------------------------
+                nueva_hora = dato.get("t")
+
+                if nueva_hora and partido.get("t") != nueva_hora:
+                    print(
+                        f"LF J{partido['j']}: "
+                        f"hora {partido.get('t')} -> {nueva_hora}"
+                    )
+
+                    partido["t"] = nueva_hora
+                    cambios += 1
+
+                # -----------------------------
+                # ACTUALIZAR RESULTADO
+                # -----------------------------
+                marcador = dato.get("res")
+
+                if marcador and not partido.get("res"):
+
+                    local, visitante = marcador
+
+                    partido["res"] = f"{local}-{visitante}"
+
+                    if partido["cond"] == "Local":
+                        gana = local > visitante
+                    else:
+                        gana = visitante > local
+
+                    partido["bal"] = (
+                        "Victoria" if gana else "Derrota"
+                    )
+
+                    print(
+                        f"LF J{partido['j']}: "
+                        f"resultado {local}-{visitante}"
+                    )
+
+                    cambios += 1
+
+                # Ya hemos encontrado este partido
+                break
+
+        return cambios
+
+    # -----------------------------------------
+    # ACB
+    # Mantener funcionamiento actual
+    # -----------------------------------------
     for partido in partidos:
+
         if partido["c"] != competicion:
             continue
 
@@ -240,7 +340,10 @@ def aplicar(partidos, competicion, resultados):
         if partido["j"] not in resultados:
             continue
 
-        if EQ not in (partido["loc"], partido["vis"]):
+        if EQ not in (
+            partido["loc"],
+            partido["vis"]
+        ):
             continue
 
         local, visitante = resultados[partido["j"]]
@@ -251,11 +354,14 @@ def aplicar(partidos, competicion, resultados):
             gana = visitante > local
 
         partido["res"] = f"{local}-{visitante}"
-        partido["bal"] = "Victoria" if gana else "Derrota"
+        partido["bal"] = (
+            "Victoria" if gana else "Derrota"
+        )
+
         cambios += 1
 
         print(
-            f"  + {competicion} J{partido['j']}: "
+            f"{competicion} J{partido['j']}: "
             f"{partido['loc']} {local}-{visitante} "
             f"{partido['vis']}"
         )
