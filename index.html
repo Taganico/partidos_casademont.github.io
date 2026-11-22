@@ -147,8 +147,61 @@ function viewCal(){
   l.forEach(m=>{const k=new Date(dayMs(m)).toLocaleDateString("es-ES",{timeZone:"UTC",month:"long",year:"numeric"});if(k!==cur){cur=k;h+=`<h2>${cap(k)}</h2>`}h+=calCard(m)});
   return h||'<div class="empty">Sin partidos.</div>';
 }
+let CLAS={ACB:[],LF:[],EU:[]};
+let CLASUPDATED="";
+
+function viewClas(){
+  if(st.c==="Todos"){
+    return '<div class="empty">Selecciona arriba Liga ACB o Liga Femenina para ver la clasificación.</div>';
+  }
+
+  if(st.c==="EU"){
+    return '<div class="empty">Clasificación EuroLeague Women pendiente de incorporar.</div>';
+  }
+
+  const lista=CLAS[st.c]||[];
+
+  if(!lista.length){
+    return '<div class="empty">Clasificación no disponible.</div>';
+  }
+
+  let h=`<h2>${CL[st.c]}</h2>`;
+
+  if(CLASUPDATED){
+    h+=`<div class="meta2" style="margin:0 4px 10px">Actualizada: ${CLASUPDATED}</div>`;
+  }
+
+  h+=`<div class="card" style="padding:0;overflow-x:auto">
+  <table style="width:100%;border-collapse:collapse;font-size:12px">
+    <thead>
+      <tr style="background:#F0F5FD">
+        <th style="padding:9px 5px;text-align:center">Pos.</th>
+        <th style="padding:9px 5px;text-align:left">Equipo</th>
+        <th style="padding:9px 5px">PJ</th>
+        <th style="padding:9px 5px">PG</th>
+        <th style="padding:9px 5px">PP</th>
+        <th style="padding:9px 5px">+/-</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  lista.forEach(e=>{
+    const casa=e.equipo.toLowerCase().includes("casademont");
+    h+=`<tr style="${casa?'background:#E8F0FD;font-weight:800;color:#0B3D91':''};border-top:1px solid #D9E2F1">
+      <td style="padding:9px 5px;text-align:center">${e.pos}</td>
+      <td style="padding:9px 5px">${esc(e.equipo)}</td>
+      <td style="padding:9px 5px;text-align:center">${e.pj}</td>
+      <td style="padding:9px 5px;text-align:center">${e.pg}</td>
+      <td style="padding:9px 5px;text-align:center">${e.pp}</td>
+      <td style="padding:9px 5px;text-align:center">${e.dif>0?"+":""}${e.dif}</td>
+    </tr>`;
+  });
+
+  h+="</tbody></table></div>";
+  return h;
+} 
 function render(){
-  document.getElementById("main").innerHTML=st.tab==="next"?viewNext():st.tab==="res"?viewRes():viewCal();
+  document.getElementById("main").innerHTML=st.tab==="next"?viewNext():st.tab==="res"?viewRes():st.tab==="cal"?viewCal():viewClas();
   document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.c));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.tab));
   document.getElementById("homeopt").style.display=st.tab==="res"?"none":"flex";
@@ -158,7 +211,7 @@ setInterval(tick,1000);
 function hdr(){document.getElementById("upd").textContent="V5 · Datos: "+UPDATED+" ("+FUENTE+") · Hoy: "+cap(new Date(TODAY).toLocaleDateString("es-ES",{timeZone:"UTC",weekday:"long",day:"numeric",month:"long"}));
 document.getElementById("pos").innerHTML=POS.map(v=>`<div>${v[0]}<b>${v[1]}</b></div>`).join("")}
 document.getElementById("seg").innerHTML=[["Todos","Todos",""],["ACB","Liga ACB (masc.)",COL.ACB],["LF","Liga Femenina",COL.LF],["EU","EuroLeague Women",COL.EU]].map(([v,t,c])=>`<button data-v="${v}">${c?`<i style="background:${c}"></i>`:""}${t}</button>`).join("");
-document.getElementById("nav").innerHTML=[["next","🏀","Próximos"],["res","📊","Resultados"],["cal","📅","Calendario"]].map(([v,i,t])=>`<button data-v="${v}"><span>${i}</span>${t}</button>`).join("");
+document.getElementById("nav").innerHTML=[["next","🏀","Próximos"],["res","📊","Resultados"],["cal","📅","Calendario"],["clas","🏆","Clasificación"]].map(([v,i,t])=>`<button data-v="${v}"><span>${i}</span>${t}</button>`).join("");
 document.getElementById("seg").onclick=e=>{const b=e.target.closest("button");if(b){st.c=b.dataset.v;st.n=5;render()}};
 document.getElementById("nav").onclick=e=>{const b=e.target.closest("button");if(b){st.tab=b.dataset.v;st.n=5;render();scrollTo(0,0)}};
 document.getElementById("home").onchange=e=>{st.home=e.target.checked;st.n=5;render()};
@@ -170,6 +223,23 @@ function cargar(){
     DATA=j.partidos;UPDATED=j.actualizado||UPDATED;if(Array.isArray(j.posiciones))POS=j.posiciones;FUENTE="en línea";prep();hdr();render();
   }).catch(()=>{});
 }
+function cargarClasificacion(){
+  fetch("clasificacion.json?t="+Date.now(),{cache:"no-store"})
+    .then(r=>{
+      if(!r.ok)throw 0;
+      return r.json();
+    })
+    .then(j=>{
+      if(!j)throw 0;
+      if(Array.isArray(j.ACB))CLAS.ACB=j.ACB;
+      if(Array.isArray(j.LF))CLAS.LF=j.LF;
+      if(Array.isArray(j.EU))CLAS.EU=j.EU;
+      CLASUPDATED=j.actualizado||"";
+      render();
+    })
+    .catch(()=>{});
+}
 cargar();
+cargarClasificacion();
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)cargar()});
 </script></body></html>
