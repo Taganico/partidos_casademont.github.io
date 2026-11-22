@@ -204,7 +204,7 @@ function render(){
   document.getElementById("main").innerHTML=st.tab==="next"?viewNext():st.tab==="res"?viewRes():st.tab==="cal"?viewCal():viewClas();
   document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.c));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===st.tab));
-  document.getElementById("homeopt").style.display=st.tab==="res"?"none":"flex";
+  document.getElementById("homeopt").style.display=(st.tab==="res"||st.tab==="clas")?"none":"flex";
   tick();
 }
 setInterval(tick,1000);
