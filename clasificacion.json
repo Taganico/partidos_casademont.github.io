@@ -1,5 +1,5 @@
 {
- "actualizado": "22/11/2026 22:35",
+ "actualizado": "23/11/2026 01:07",
  "ACB": [
   {
    "pos": 1,
@@ -186,12 +186,12 @@
   {
    "pos": 1,
    "equipo": "CASADEMONT ZARAGOZA",
-   "pj": 7,
-   "pg": 7,
+   "pj": 8,
+   "pg": 8,
    "pp": 0,
-   "pf": 581,
-   "pc": 418,
-   "dif": 163
+   "pf": 651,
+   "pc": 486,
+   "dif": 165
   },
   {
    "pos": 2,
@@ -226,12 +226,12 @@
   {
    "pos": 5,
    "equipo": "MIRAI EUSKOTREN",
-   "pj": 7,
+   "pj": 8,
    "pg": 5,
-   "pp": 2,
-   "pf": 491,
-   "pc": 452,
-   "dif": 39
+   "pp": 3,
+   "pf": 559,
+   "pc": 522,
+   "dif": 37
   },
   {
    "pos": 6,
@@ -276,12 +276,12 @@
   {
    "pos": 10,
    "equipo": "MEINS AVENIDA",
-   "pj": 7,
-   "pg": 2,
+   "pj": 8,
+   "pg": 3,
    "pp": 5,
-   "pf": 500,
-   "pc": 529,
-   "dif": -29
+   "pf": 569,
+   "pc": 583,
+   "dif": -14
   },
   {
    "pos": 11,
@@ -336,12 +336,12 @@
   {
    "pos": 16,
    "equipo": "KUTXABANK ARASKI",
-   "pj": 7,
+   "pj": 8,
    "pg": 0,
-   "pp": 7,
-   "pf": 425,
-   "pc": 530,
-   "dif": -105
+   "pp": 8,
+   "pf": 479,
+   "pc": 599,
+   "dif": -120
   }
  ],
  "EU": []
