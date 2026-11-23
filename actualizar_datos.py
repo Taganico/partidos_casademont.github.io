@@ -261,7 +261,7 @@ def aplicar(partidos, competicion, resultados):
                     continue
 
                 if bloque.lower().find(local_esperado.lower()) > 
-                    bloque.lower().find(visitante_esperado.lower()):
+                bloque.lower().find(visitante_esperado.lower()):
                     continue
                     
             # ------------------------------------------------
